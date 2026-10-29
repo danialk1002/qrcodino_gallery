@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QRcodino | Luxury Gallery</title>
+
+<style>
+:root {
+  --purple: #7B00FF;
+  --gold: #e8c88d;
+  --bg: #100e14;
+  --panel: #211a29;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: white;
+  font-family: Tahoma, Arial, sans-serif;
+  line-height: 1.8;
+}
+
+header {
+  padding: 22px;
+  text-align: center;
+  border-bottom: 1px solid #403049;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  direction: ltr;
+}
+
+.logo span { color: var(--purple); }
+
+.subtitle {
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.hero {
+  padding: 65px 20px;
+  text-align: center;
+  background: linear-gradient(135deg,#492168,#17111e);
+}
+
+.hero h1 {
+  font-size: 30px;
+  line-height: 1.6;
+}
+
+.hero h1 span { color: var(--gold); }
+
+.hero p {
+  color: #ddd;
+  font-size: 14px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--purple);
+  color: white;
+  padding: 11px 25px;
+  border-radius: 12px;
+  text-decoration: none;
+  margin-top: 15px;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.container {
+  max-width: 1050px;
+  margin: auto;
+  padding: 25px 15px;
+}
+
+h2 { color: var(--gold); }
+
+.filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 25px;
+}
+
+.filter {
+  background: #2b2035;
+  border: 1px solid #594568;
+  color: white;
+  padding: 9px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filter.active {
+  background: var(--purple);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid #403049;
+  border-radius: 17px;
+  overflow: hidden;
+}
+
+.card img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  background: #34263d;
+}
+
+.info { padding: 14px; }
+
+.info h3 {
+  font-size: 15px;
+  margin: 0;
+}
+
+.category {
+  color: #b9b0c3;
+  font-size: 12px;
+}
+
+.price {
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.details {
+  background: #39254b;
+  color: white;
+  border: 1px solid #76538f;
+  border-radius: 9px;
+  padding: 9px;
+  width: 100%;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 35px 15px;
+  border-top: 1px solid #403049;
+  color: #bbb;
+  font-size: 13px;
+}
+
+footer a { color: var(--gold); }
+
+.notice {
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
+  margin: 30px 0;
+}
+
+/* Product details popup */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000c;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.modal.open { display: flex; }
+
+.modal-box {
+  background: #241b2d;
+  padding: 20px;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-box img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.close {
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+@media(max-width:700px) {
+  .products {
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+  }
+
+  .card img { height: 160px; }
+  .info { padding: 10px; }
+  .info h3 { font-size: 13px; }
+  .hero h1 { font-size: 25px; }
+}
+
+@media(max-width:350px) {
+  .products { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo"><span>QR</span>codino</div>
+  <div class="subtitle">LUXURY GALLERY</div>
+</header>
+
+<section class="hero">
+  <div style="color:var(--gold)">THE ART OF ELEGANCE</div>
+
+  <h1>
+    جزئیات کوچک،<br>
+    <span>انتخاب‌های ماندگار.</span>
+  </h1>
+
+  <p>
+    تجربه یک گالری دیجیتال لوکس؛
+    ساعت، عطر و اکسسوری، تنها با یک اسکن.
+  </p>
+
+  <a href="#gallery" class="btn">مشاهده مجموعه ↓</a>
+</section>
+
+<main class="container" id="gallery">
+
+  <h2>✦ مجموعه منتخب</h2>
+
+  <div class="filters">
+    <button class="filter active" data-cat="all">همه محصولات</button>
+    <button class="filter" data-cat="watch">⌚ ساعت</button>
+    <button class="filter" data-cat="perfume">✧ عطر</button>
+    <button class="filter" data-cat="accessory">◇ اکسسوری</button>
+  </div>
+
+  <div class="products" id="products"></div>
+
+  <p class="notice">
+    تمامی نام‌ها و قیمت‌ها صرفاً برای نمایش نمونه‌کار هستند.
+  </p>
+
+</main>
+
+<footer>
+  <strong>QRcodino 💜</strong>
+  <p>با یک اسکن، دنیای امکانات رو باز کن!</p>
+
+  <a href="https://www.instagram.com/qrcodino/"
+     target="_blank" rel="noopener noreferrer">
+    Instagram @qrcodino
+  </a>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalName">
+  <div class="modal-box">
+
+    <button class="close" id="closeBtn" aria-label="بستن">×</button>
+
+    <img id="modalImage" alt="">
+
+    <h2 id="modalName"></h2>
+
+    <div class="price" id="modalPrice"></div>
+
+    <p id="modalDesc"></p>
+
+    <a class="btn"
+       href="https://www.instagram.com/qrcodino/"
+       target="_blank" rel="noopener noreferrer">
+      مشاهده صفحه QRcodino
+    </a>
+
+    <p class="notice">
+      این گالری نمایشی است و ثبت سفارش واقعی ندارد.
+    </p>
+
+  </div>
+</div>
+
+<script>
+
+const products = [
+  {
+    name: "ساعت کلاسیک آرورا",
+    cat: "watch",
+    type: "ساعت",
+    price: "۱۲٬۸۰۰٬۰۰۰ تومان",
+    desc: "طراحی مینیمال با صفحه تیره و بند چرمی. محصول فرضی.",
+    img: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=800"
+  },
+  {
+    name: "ساعت سیلور تایم",
+    cat: "watch",
+    type: "ساعت",
+    price: "۹٬۴۵۰٬۰۰۰ تومان",
+    desc: "ترکیبی از فلز براق و طراحی کلاسیک.",
+    img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800"
+  },
+  {
+    name: "عطر نوآر",
+    cat: "perfume",
+    type: "عطر",
+    price: "۴٬۳۰۰٬۰۰۰ تومان",
+    desc: "رایحه‌ای خیالی با شخصیت گرم و مرموز.",
+    img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=800"
+  },
+  {
+    name: "عطر بلوم",
+    cat: "perfume",
+    type: "عطر",
+    price: "۳٬۷۵۰٬۰۰۰ تومان",
+    desc: "الهام گرفته از لطافت گل‌ها.",
+    img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800"
+  },
+  {
+    name: "اکسسوری گلد",
+    cat: "accessory",
+    type: "اکسسوری",
+    price: "۲٬۹۰۰٬۰۰۰ تومان",
+    desc: "جزئیاتی ظریف برای استایل رسمی.",
+    img: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=800"
+  },
+  {
+    name: "اکسسوری پرل",
+    cat: "accessory",
+    type: "اکسسوری",
+    price: "۱٬۹۸۰٬۰۰۰ تومان",
+    desc: "طراحی ظریف و روشن برای استایل خاص.",
+    img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800"
+  }
+];
+
+const grid = document.getElementById("products");
+const modal = document.getElementById("modal");
+let previousFocus = null;
+
+function showProducts(category = "all") {
+
+  const selected = products
+    .map((p, i) => ({...p, id: i}))
+    .filter(p => category === "all" || p.cat === category);
+
+  grid.innerHTML = selected.map(p => `
+    <article class="card">
+
+      <img src="${p.img}" alt="${p.name}" loading="lazy">
+
+      <div class="info">
+        <div class="category">${p.type}</div>
+
+        <h3>${p.name}</h3>
+
+        <div class="price">${p.price}</div>
+
+        <button class="details" data-id="${p.id}">
+          مشاهده جزئیات
+        </button>
+      </div>
+
+    </article>
+  `).join("");
+}
+
+showProducts();
+
+document.querySelectorAll(".filter").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document.querySelectorAll(".filter").forEach(b => {
+      b.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    showProducts(button.dataset.cat);
+
+  });
+
+});
+
+grid.addEventListener("click", event => {
+
+  const button = event.target.closest("[data-id]");
+
+  if (!button) return;
+
+  previousFocus = button;
+
+  const product = products[Number(button.dataset.id)];
+
+  document.getElementById("modalImage").src = product.img;
+  document.getElementById("modalImage").alt = product.name;
+  document.getElementById("modalName").textContent = product.name;
+  document.getElementById("modalPrice").textContent = product.price;
+  document.getElementById("modalDesc").textContent = product.desc;
+
+  modal.classList.add("open");
+  document.getElementById("closeBtn").focus();
+
+});
+
+function closeModal() {
+  modal.classList.remove("open");
+  if (previousFocus) previousFocus.focus();
+}
+
+document.getElementById("closeBtn").onclick = closeModal;
+
+modal.addEventListener("click", event => {
+  if (event.target === modal) closeModal();
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeModal();
+});
+
+</script>
+
+</body>
+</html>
